@@ -1,14 +1,24 @@
 import { useState } from "react";
-import { Phone, Clock, MapPin, Send } from "lucide-react";
+import { Phone, Clock, MapPin, Send, ChevronDown } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
+
+const serviceOptions = [
+  "Security Services",
+  "Housekeeping",
+  "Deep Cleaning",
+  "Pest Control",
+  "Bouncer Services",
+  "Gardening",
+  "Other",
+];
 
 export default function ContactSection() {
   const { ref, visible } = useInView();
-  const [form, setForm] = useState({ name: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", phone: "", service: "", message: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `Hello, I am ${form.name}. Phone: ${form.phone}. ${form.message}`;
+    const text = `Hello, I am ${form.name}. Phone: ${form.phone}. Service: ${form.service}. ${form.message}`;
     window.open(`https://wa.me/917892979134?text=${encodeURIComponent(text)}`, "_blank");
   };
 
@@ -89,6 +99,23 @@ export default function ContactSection() {
                   className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-gold/50 transition-shadow"
                   placeholder="Your phone number"
                 />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-1">Service Required</label>
+                <div className="relative">
+                  <select
+                    required
+                    value={form.service}
+                    onChange={(e) => setForm({ ...form, service: e.target.value })}
+                    className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-gold/50 transition-shadow appearance-none cursor-pointer"
+                  >
+                    <option value="" disabled>Select a service</option>
+                    {serviceOptions.map((s) => (
+                      <option key={s} value={s}>{s}</option>
+                    ))}
+                  </select>
+                  <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground pointer-events-none" />
+                </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-1">Message</label>

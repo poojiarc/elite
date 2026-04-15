@@ -1,6 +1,22 @@
 import { Link } from "@tanstack/react-router";
-import { Heart, Phone, MapPin, Clock, Mail } from "lucide-react";
+import { Heart, Phone, MapPin, Clock, Home, Info, Briefcase, MessageSquare, Shield, Sparkles, Bug, TreePine, Users, Brush } from "lucide-react";
 import logo from "@/assets/logo-icon.png";
+
+const quickLinks = [
+  { to: "/" as const, label: "Home", icon: Home },
+  { to: "/about" as const, label: "About Us", icon: Info },
+  { to: "/services" as const, label: "Services", icon: Briefcase },
+  { to: "/contact" as const, label: "Contact", icon: MessageSquare },
+];
+
+const serviceLinks = [
+  { label: "Security Services", icon: Shield },
+  { label: "Housekeeping", icon: Sparkles },
+  { label: "Deep Cleaning", icon: Brush },
+  { label: "Pest Control", icon: Bug },
+  { label: "Bouncer Services", icon: Users },
+  { label: "Gardening", icon: TreePine },
+];
 
 export default function Footer() {
   return (
@@ -25,14 +41,10 @@ export default function Footer() {
           <div>
             <h3 className="font-heading text-lg font-semibold text-gold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              {[
-                { to: "/", label: "Home" },
-                { to: "/about", label: "About Us" },
-                { to: "/services", label: "Services" },
-                { to: "/contact", label: "Contact" },
-              ].map(({ to, label }) => (
+              {quickLinks.map(({ to, label, icon: Icon }) => (
                 <li key={to}>
-                  <Link to={to} className="text-sm text-navy-foreground/70 hover:text-gold transition-colors">
+                  <Link to={to} className="flex items-center gap-2 text-sm text-navy-foreground/70 hover:text-gold transition-colors">
+                    <Icon className="h-4 w-4 text-gold shrink-0" />
                     {label}
                   </Link>
                 </li>
@@ -44,10 +56,11 @@ export default function Footer() {
           <div>
             <h3 className="font-heading text-lg font-semibold text-gold mb-4">Our Services</h3>
             <ul className="space-y-2">
-              {["Security Services", "Housekeeping", "Deep Cleaning", "Pest Control", "Bouncer Services", "Gardening"].map((s) => (
-                <li key={s}>
-                  <Link to="/services" className="text-sm text-navy-foreground/70 hover:text-gold transition-colors">
-                    {s}
+              {serviceLinks.map(({ label, icon: Icon }) => (
+                <li key={label}>
+                  <Link to="/services" className="flex items-center gap-2 text-sm text-navy-foreground/70 hover:text-gold transition-colors">
+                    <Icon className="h-4 w-4 text-gold shrink-0" />
+                    {label}
                   </Link>
                 </li>
               ))}
@@ -76,7 +89,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="border-t border-border mt-0 pt-8 pb-8 flex flex-col items-center gap-4 px-6">
+      <div className="mt-0 pt-8 pb-8 flex flex-col items-center gap-4 px-6">
         <p className="text-xs text-muted-foreground">
           © {new Date().getFullYear()} Global Elite Facility Services. All rights reserved.
         </p>
