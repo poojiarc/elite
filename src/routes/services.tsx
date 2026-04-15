@@ -16,7 +16,7 @@ export const Route = createFileRoute("/services")({
 function ServicesPage() {
   return (
     <div className="pt-20">
-      <ServicesSection />
+      <ServicesSection showDetails />
     </div>
   );
 }
