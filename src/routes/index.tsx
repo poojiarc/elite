@@ -1,26 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
+import HeroSection from "@/components/HeroSection";
+import AboutSection from "@/components/AboutSection";
+import ServicesSection from "@/components/ServicesSection";
+import ContactSection from "@/components/ContactSection";
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Global Elite Facility Services — Professional Security & Facility Management" },
+      { name: "description", content: "Professional security, housekeeping, and facility management services in Bengaluru. PSARA licensed, 24/7 emergency response. Contact us today." },
+      { property: "og:title", content: "Global Elite Facility Services" },
+      { property: "og:description", content: "Professional Security & Facility Services Under One Roof" },
+    ],
+  }),
+  component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function HomePage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="/placeholder.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <HeroSection />
+      <AboutSection />
+      <ServicesSection />
+      <ContactSection />
+    </>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
