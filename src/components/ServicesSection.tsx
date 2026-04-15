@@ -89,19 +89,27 @@ export default function ServicesSection({ showDetails = false }: { showDetails?:
         {/* Detailed descriptions for the services page */}
         {showDetails && (
           <div className="mt-16 space-y-8">
-            {services.map(({ title, details, icon: Icon }, i) => (
+            {services.map(({ title, details, img, icon: Icon }, i) => (
               <div
                 key={title}
-                className={`bg-card border border-border rounded-xl p-6 md:p-8 flex gap-5 items-start ${
+                className={`bg-card border border-border rounded-xl overflow-hidden flex flex-col md:flex-row ${
                   visible ? "animate-reveal-up" : "opacity-0"
                 }`}
                 style={{ animationDelay: `${i * 100 + 600}ms` }}
               >
-                <div className="w-12 h-12 rounded-lg bg-gold/10 flex items-center justify-center shrink-0">
-                  <Icon className="h-6 w-6 text-gold" />
-                </div>
-                <div>
-                  <h3 className="font-heading text-xl font-bold text-foreground mb-2">{title}</h3>
+                <img
+                  src={img}
+                  alt={title}
+                  className="w-full md:w-72 h-52 md:h-auto object-cover shrink-0"
+                  loading="lazy"
+                />
+                <div className="p-6 md:p-8 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center shrink-0">
+                      <Icon className="h-5 w-5 text-gold" />
+                    </div>
+                    <h3 className="font-heading text-xl font-bold text-foreground">{title}</h3>
+                  </div>
                   <p className="text-muted-foreground text-sm leading-relaxed">{details}</p>
                 </div>
               </div>
