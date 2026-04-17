@@ -3,13 +3,20 @@ import { Home, Info, Briefcase, Phone, Menu, X, Package } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import logo from "@/assets/logo-icon.png";
 
-const navItems = [
+type NavItem = {
+  to: string;
+  label: string;
+  icon: typeof Home;
+  end?: boolean;
+};
+
+const navItems: NavItem[] = [
   { to: "/", label: "Home", icon: Home, end: true },
   { to: "/about", label: "About", icon: Info },
   { to: "/services", label: "Services", icon: Briefcase },
   { to: "/products", label: "Products", icon: Package },
   { to: "/contact", label: "Contact", icon: Phone },
-] as const;
+];
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   `flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
