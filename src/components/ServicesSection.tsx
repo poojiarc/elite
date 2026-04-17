@@ -68,54 +68,43 @@ export default function ServicesSection({ showDetails = false }: { showDetails?:
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map(({ title, desc, img, icon: Icon }, i) => (
+          {services.map(({ title, desc, img, icon: Icon, details }, i) => (
             <div
               key={title}
-              className={`service-card relative rounded-xl overflow-hidden h-72 group cursor-pointer ${
+              className={`service-card bg-card border border-border rounded-xl overflow-hidden group flex flex-col ${
                 visible ? "animate-reveal-up" : "opacity-0"
               }`}
               style={{ animationDelay: `${i * 100 + 200}ms` }}
             >
-              <img src={img} alt={title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
-              <div className="service-overlay absolute inset-0 bg-navy/70" />
-              <div className="relative z-10 h-full flex flex-col justify-end p-6">
-                <h3 className="font-heading text-xl font-bold text-navy-foreground mb-2">{title}</h3>
-                <p className="text-sm text-navy-foreground/80">{desc}</p>
+              {/* Image with title overlay */}
+              <div className="relative h-56 overflow-hidden">
+                <img
+                  src={img}
+                  alt={title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                />
+                <div className="service-overlay absolute inset-0 bg-navy/70" />
+                <div className="relative z-10 h-full flex flex-col justify-end p-5">
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="w-9 h-9 rounded-lg bg-gold/20 backdrop-blur-sm flex items-center justify-center shrink-0">
+                      <Icon className="h-5 w-5 text-gold" />
+                    </div>
+                    <h3 className="font-heading text-xl font-bold text-navy-foreground">{title}</h3>
+                  </div>
+                </div>
+              </div>
+
+              {/* Description below the image */}
+              <div className="p-5 flex-1 flex flex-col">
+                <p className="text-sm text-foreground font-medium mb-2">{desc}</p>
+                {showDetails && (
+                  <p className="text-sm text-muted-foreground leading-relaxed">{details}</p>
+                )}
               </div>
             </div>
           ))}
         </div>
-
-        {/* Detailed descriptions for the services page */}
-        {showDetails && (
-          <div className="mt-16 space-y-8">
-            {services.map(({ title, details, img, icon: Icon }, i) => (
-              <div
-                key={title}
-                className={`bg-card border border-border rounded-xl overflow-hidden flex flex-col md:flex-row ${
-                  visible ? "animate-reveal-up" : "opacity-0"
-                }`}
-                style={{ animationDelay: `${i * 100 + 600}ms` }}
-              >
-                <img
-                  src={img}
-                  alt={title}
-                  className="w-full md:w-72 h-52 md:h-auto object-cover shrink-0"
-                  loading="lazy"
-                />
-                <div className="p-6 md:p-8 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center shrink-0">
-                      <Icon className="h-5 w-5 text-gold" />
-                    </div>
-                    <h3 className="font-heading text-xl font-bold text-foreground">{title}</h3>
-                  </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{details}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     </section>
   );
