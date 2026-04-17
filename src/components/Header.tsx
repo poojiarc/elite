@@ -14,7 +14,7 @@ const navItems: NavItem[] = [
   { to: "/", label: "Home", icon: Home, end: true },
   { to: "/about", label: "About", icon: Info },
   { to: "/services", label: "Services", icon: Briefcase },
-  { to: "/products", label: "Products", icon: Package },
+
   { to: "/contact", label: "Contact", icon: Phone },
 ];
 
